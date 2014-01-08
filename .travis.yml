@@ -1,9 +1,12 @@
 language: python
-env:
-  - TOXENV=py26
-  - TOXENV=py27
-  - TOXENV=py33
+python:
+ - "2.6"
+ - "2.7"
+ - "3.3"
 install:
   - pip install -r requirements.txt
 script:
-  - tox
+  - coverage run --source=greeter setup.py test
+  - coverage report -m
+after_script:
+  - coveralls --verbose
